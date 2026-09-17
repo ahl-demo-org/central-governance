@@ -1,0 +1,21 @@
+name: CodeMender PR Scan
+
+on:
+  pull_request:
+
+jobs:
+  compliance-check:
+    name: Mandatory CodeMender Scan
+    # Skips execution entirely if the pull request is a draft
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the target repository's code
+        uses: actions/checkout@v4
+
+      - name: Run linting or security scanner
+        run: |
+          echo "Running mandatory compliance validations for repo ${{ github.event.action }}..."
+          echo "Submitted by ${{ github.actor }}"
+          # Insert your test scripts, linting tools, or security scans here
+          echo "PR data: \n\n ${{ github.event }}"
